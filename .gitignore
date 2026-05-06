@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+.idea/
+reports/
+*.pyc
+*.pyo
+*.pyd
+*.log
+validation_report_*.md
