@@ -10,6 +10,7 @@ The original migration scenario involved a payroll domain with high data volume,
 
 The core pain points were practical:
 
+- a very large mass of payroll data arrived through a single wide Oracle view, which is convenient for legacy consultation but poor as a durable application data model
 - source data arrived denormalized and operationally noisy
 - payroll records needed to be preserved with relational consistency across employees, links, payroll references, items, and snapshots
 - the destination platform needed safer and more queryable data than the legacy extraction format could provide
@@ -22,6 +23,7 @@ This application was developed to turn a fragile migration challenge into a cont
 
 Instead of treating the job as "extract and dump," the tool was structured to support the full path from source interrogation to normalized persistence:
 
+- break a single dense payroll source into a normalized relational model designed for downstream application use
 - inspect Oracle data before load
 - detect mapping inconsistencies early
 - transform payroll records into a target model with explicit entity boundaries
