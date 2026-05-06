@@ -4,6 +4,33 @@ Python ETL and migration CLI for payroll data, built to extract records from Ora
 
 This repository is a sanitized public case study derived from a real migration workflow. Sensitive credentials, institution-specific object names, generated reports, and internal operational traces were removed before publication.
 
+## Problem context
+
+The original migration scenario involved a payroll domain with high data volume, multiple dependent entities, and a source environment that was useful for consultation but not suitable as a long-term operational foundation for the target system.
+
+The core pain points were practical:
+
+- source data arrived denormalized and operationally noisy
+- payroll records needed to be preserved with relational consistency across employees, links, payroll references, items, and snapshots
+- the destination platform needed safer and more queryable data than the legacy extraction format could provide
+- the migration could not rely on blind bulk loads because validation gaps would become downstream product defects
+- the team needed repeatable execution, not a one-off script that only worked on the machine of whoever wrote it
+
+## Why the application was developed
+
+This application was developed to turn a fragile migration challenge into a controlled operational workflow.
+
+Instead of treating the job as "extract and dump," the tool was structured to support the full path from source interrogation to normalized persistence:
+
+- inspect Oracle data before load
+- detect mapping inconsistencies early
+- transform payroll records into a target model with explicit entity boundaries
+- load PostgreSQL with idempotent, auditable steps
+- generate cache artifacts required by downstream consumers
+- support both assisted human operation and repeatable scripted execution
+
+In short, the tool exists because the real problem was not only moving data. The real problem was moving it with confidence.
+
 ## Why this project matters
 
 This was not a toy script. The application was designed to support a high-detail migration flow with:
